@@ -3,27 +3,28 @@
 @{
     ViewBag.Title = "我的";
 }
-<h2>欢迎, @Model.Username!</h2>
+<h2>欢迎, @Model.Name!</h2>
 
-<p>姓名: @Model.Name</p>
+<p>用户名: @Model.Username</p>
+<p>密码: @Model.Password</p>
 <p>权限: @Model.Role</p>
+<p>工资: @Model.Salary</p>
 <p>联系方式: @Model.Contact</p>
 <p>所在部门: @Model.CurrentDepartment</p>
 
-<a href="@Url.Action("Index","Notifications")" class="btn btn-primary">查看企业通知</a>
-
 @if (ViewBag.Role == 0)
 {
+    <a href="@Url.Action("List","Notifications")" class="btn btn-primary">查看企业通知</a>
     <a href="@Url.Action("ChangePassword")" class="btn btn-primary">修改密码</a>
 }
 
-@if (ViewBag.Role == 1)
+@if (ViewBag.Role > 0)
 {
     <a href="@Url.Action("Index")" class="btn btn-primary">管理员工信息</a>
-    <a href="@Url.Action("Create","Notifications")" class="btn btn-primary">发布企业通知</a>
+    <a href="@Url.Action("Index","Notifications")" class="btn btn-primary">编辑企业通知</a>
 }
 
-@if (ViewBag.Role == 2)
+@if (ViewBag.Role > 1)
 {
     <a href="@Url.Action("Export")" class="btn btn-primary">导出数据</a>
     <a href="@Url.Action("Backup")" class="btn btn-primary">备份数据</a>

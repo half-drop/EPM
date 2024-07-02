@@ -137,5 +137,51 @@ namespace EPM.Controllers
 
             return View(employee);
         }
+
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        // POST: Employees/ChangePassword
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            // 获取当前登录的用户ID
+            var username = User.Identity.Name;
+            var user = db.Employees.FirstOrDefault(e => e.Username == username);
+            if (user == null)
+            {
+                return HttpNotFound("未找到用户。");
+            }
+
+            if (!IsPasswordCorrect(user, model.OldPassword))
+            {
+                ViewBag.PasswordError = "当前密码不正确。";
+                return View(model);
+            }
+
+            user.Password = EncryptPassword(model.NewPassword);
+            db.SaveChanges();
+            ViewBag.PasswordFinish = "密码已经修改";
+
+            return RedirectToAction("Dashboard");
+        }
+
+        private bool IsPasswordCorrect(Employees user, string password)
+        {
+            return user.Password == password;
+        }
+
+        private string EncryptPassword(string password)
+        {
+            return password;
+        }
     }
 }

@@ -1,33 +1,31 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "首页";
 }
 
 <main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
+    <section class="row" aria-labelledby="systemTitle">
+        <h1 id="title">企业人事管理系统</h1>
+        <p class="lead">企业人事管理系统是为现代企业提供的一站式员工管理解决方案，支持信息化、系统化管理，提高办公效率。</p>
+        <p><a href='@Url.Action("Login", "Home")' class="btn btn-primary btn-md">登录</a></p>
     </section>
 
     <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
+        <section class="col-md-4" aria-labelledby="userFunctionTitle">
+            <h2 id="userFunctionTitle">用户功能</h2>
             <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
+                提供用户注册、登录和密码管理等基本功能，使员工能够轻松访问和更新个人信息及企业通知。
             </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+            
         </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <section class="col-md-4" aria-labelledby="hrFunctionTitle">
+            <h2 id="hrFunctionTitle">人事专员功能</h2>
+            <p>包括员工调动、基本信息查询、考评录入、薪酬调整及职称评定等，帮助人事管理人员高效管理企业人力资源。</p>
+            
         </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <section class="col-md-4" aria-labelledby="adminFunctionTitle">
+            <h2 id="adminFunctionTitle">管理员功能</h2>
+            <p>强大的后台管理功能，包括数据备份与恢复、报表输出及用户权限设置等，确保数据安全并提升管理效率。</p>
+            
         </section>
     </div>
 </main>

@@ -20,6 +20,11 @@ namespace EPM.Controllers
             return View(db.Notifications.ToList());
         }
 
+        public ActionResult List()
+        {
+            return View(db.Notifications.ToList());
+        }
+
         // GET: Notifications/Details/5
         public ActionResult Details(int? id)
         {
