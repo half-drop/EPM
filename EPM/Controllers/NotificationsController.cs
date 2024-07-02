@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using EPM.Models;
 
-namespace EPM.Views
+namespace EPM.Controllers
 {
     public class NotificationsController : Controller
     {
@@ -46,10 +46,11 @@ namespace EPM.Views
         // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "NotificationID,Title,Content,DatePublished")] Notifications notifications)
+        public ActionResult Create([Bind(Include = "NotificationID,Title,Content")] Notifications notifications)
         {
             if (ModelState.IsValid)
             {
+                notifications.DatePublished = DateTime.Now;
                 db.Notifications.Add(notifications);
                 db.SaveChanges();
                 return RedirectToAction("Index");

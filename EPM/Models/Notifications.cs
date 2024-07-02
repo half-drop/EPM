@@ -17,6 +17,6 @@ namespace EPM.Models
         public int NotificationID { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
-        public Nullable<System.DateTime> DatePublished { get; set; }
+        public DateTime DatePublished { get; set; }
     }
 }

@@ -10,7 +10,7 @@
 <p>联系方式: @Model.Contact</p>
 <p>所在部门: @Model.CurrentDepartment</p>
 
-<a href="@Url.Action("CheckNotification")" class="btn btn-primary">查看企业通知</a>
+<a href="@Url.Action("Index","Notifications")" class="btn btn-primary">查看企业通知</a>
 
 @if (ViewBag.Role == 0)
 {
@@ -20,7 +20,7 @@
 @if (ViewBag.Role == 1)
 {
     <a href="@Url.Action("Index")" class="btn btn-primary">管理员工信息</a>
-    <a href="@Url.Action("CreatNotification")" class="btn btn-primary">发布企业通知</a>
+    <a href="@Url.Action("Create","Notifications")" class="btn btn-primary">发布企业通知</a>
 }
 
 @if (ViewBag.Role == 2)
