@@ -1,0 +1,31 @@
+﻿@model EPM.Models.Employees
+
+@{
+    ViewBag.Title = "我的";
+}
+<h2>欢迎, @Model.Username!</h2>
+
+<p>姓名: @Model.Name</p>
+<p>权限: @Model.Role</p>
+<p>联系方式: @Model.Contact</p>
+<p>所在部门: @Model.CurrentDepartment</p>
+
+<a href="@Url.Action("CheckNotification")" class="btn btn-primary">查看企业通知</a>
+
+@if (ViewBag.Role == 0)
+{
+    <a href="@Url.Action("ChangePassword")" class="btn btn-primary">修改密码</a>
+}
+
+@if (ViewBag.Role == 1)
+{
+    <a href="@Url.Action("Index")" class="btn btn-primary">管理员工信息</a>
+    <a href="@Url.Action("CreatNotification")" class="btn btn-primary">发布企业通知</a>
+}
+
+@if (ViewBag.Role == 2)
+{
+    <a href="@Url.Action("Export")" class="btn btn-primary">导出数据</a>
+    <a href="@Url.Action("Backup")" class="btn btn-primary">备份数据</a>
+    <a href="@Url.Action("Restore")" class="btn btn-primary">还原数据</a>
+}

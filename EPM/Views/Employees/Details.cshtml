@@ -1,0 +1,73 @@
+﻿@model EPM.Models.Employees
+
+@{
+    ViewBag.Title = "员工详情";
+}
+
+<h2>员工详情</h2>
+
+<div>
+    <h4>员工详情</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            姓名
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            用户名
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+
+        <dt>
+            密码
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            权限
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Role)
+        </dd>
+
+        <dt>
+            联系方式
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contact)
+        </dd>
+
+        <dt>
+            所在部门
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentDepartment)
+        </dd>
+
+        <dt>
+            工资
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Salary)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("修改", "Edit", new { id = Model.EmployeeID }) |
+    @Html.ActionLink("返回", "Index")
+</p>

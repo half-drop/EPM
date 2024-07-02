@@ -1,0 +1,45 @@
+﻿@model IEnumerable<EPM.Models.Notifications>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DatePublished)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DatePublished)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.NotificationID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.NotificationID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.NotificationID })
+        </td>
+    </tr>
+}
+
+</table>

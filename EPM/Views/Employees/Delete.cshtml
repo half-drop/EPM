@@ -1,0 +1,80 @@
+﻿@model EPM.Models.Employees
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>删除员工</h2>
+
+<h3>确认删除以下员工？</h3>
+<div>
+    <h4>员工信息</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            姓名
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            用户名
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+
+        <dt>
+            密码
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            权限
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Role)
+        </dd>
+
+        <dt>
+            联系方式
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contact)
+        </dd>
+
+        <dt>
+            所在部门
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CurrentDepartment)
+        </dd>
+
+        <dt>
+            工资
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Salary)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

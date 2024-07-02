@@ -1,0 +1,69 @@
+﻿@model IEnumerable<EPM.Models.Employees>
+
+@{
+    ViewBag.Title = "员工管理";
+}
+
+<h2>员工管理</h2>
+
+<p>
+    @Html.ActionLink("添加新员工", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            姓名
+        </th>
+        <th>
+            用户名
+        </th>
+        <th>
+            密码
+        </th>
+        <th>
+            权限
+        </th>
+        <th>
+            联系方式
+        </th>
+        <th>
+            部门
+        </th>
+        <th>
+            工资
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contact)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentDepartment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Salary)
+            </td>
+            <td>
+                @Html.ActionLink("修改", "Edit", new { id = item.EmployeeID }) |
+                @Html.ActionLink("详情", "Details", new { id = item.EmployeeID }) |
+                @Html.ActionLink("删除", "Delete", new { id = item.EmployeeID })
+            </td>
+        </tr>
+    }
+</table>

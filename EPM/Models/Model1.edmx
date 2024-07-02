@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EPMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" />
+          <Property Name="Role" Type="int" />
+          <Property Name="Contact" Type="nvarchar" MaxLength="100" />
+          <Property Name="CurrentDepartment" Type="nvarchar" MaxLength="100" />
+          <Property Name="Salary" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="EmployeeTrainings">
+          <Key>
+            <PropertyRef Name="RecordID" />
+          </Key>
+          <Property Name="RecordID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeID" Type="int" />
+          <Property Name="TrainingID" Type="int" />
+          <Property Name="ParticipationStatus" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="EmployeeTransfers">
+          <Key>
+            <PropertyRef Name="TransferID" />
+          </Key>
+          <Property Name="TransferID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeID" Type="int" />
+          <Property Name="OriginalDepartment" Type="nvarchar" MaxLength="100" />
+          <Property Name="NewDepartment" Type="nvarchar" MaxLength="100" />
+          <Property Name="TransferDate" Type="date" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="NotificationID" />
+          </Key>
+          <Property Name="NotificationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" />
+          <Property Name="Content" Type="nvarchar" MaxLength="255" />
+          <Property Name="DatePublished" Type="date" />
+        </EntityType>
+        <EntityType Name="Trainings">
+          <Key>
+            <PropertyRef Name="TrainingID" />
+          </Key>
+          <Property Name="TrainingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Topic" Type="nvarchar" MaxLength="100" />
+          <Property Name="TrainingDate" Type="date" />
+        </EntityType>
+        <Association Name="FK__EmployeeT__Emplo__398D8EEE">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="EmployeeTransfers" Type="Self.EmployeeTransfers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="EmployeeTransfers">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EmployeeT__Emplo__3E52440B">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="EmployeeTrainings" Type="Self.EmployeeTrainings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="EmployeeTrainings">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EmployeeT__Train__3F466844">
+          <End Role="Trainings" Type="Self.Trainings" Multiplicity="0..1" />
+          <End Role="EmployeeTrainings" Type="Self.EmployeeTrainings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainings">
+              <PropertyRef Name="TrainingID" />
+            </Principal>
+            <Dependent Role="EmployeeTrainings">
+              <PropertyRef Name="TrainingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EPMModelStoreContainer">
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeTrainings" EntityType="Self.EmployeeTrainings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeTransfers" EntityType="Self.EmployeeTransfers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trainings" EntityType="Self.Trainings" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__EmployeeT__Emplo__398D8EEE" Association="Self.FK__EmployeeT__Emplo__398D8EEE">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="EmployeeTransfers" EntitySet="EmployeeTransfers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EmployeeT__Emplo__3E52440B" Association="Self.FK__EmployeeT__Emplo__3E52440B">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="EmployeeTrainings" EntitySet="EmployeeTrainings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EmployeeT__Train__3F466844" Association="Self.FK__EmployeeT__Train__3F466844">
+            <End Role="Trainings" EntitySet="Trainings" />
+            <End Role="EmployeeTrainings" EntitySet="EmployeeTrainings" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EPMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="Int32" />
+          <Property Name="Contact" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentDepartment" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Salary" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="EmployeeTransfers" Relationship="Self.FK__EmployeeT__Emplo__398D8EEE" FromRole="Employees" ToRole="EmployeeTransfers" />
+          <NavigationProperty Name="EmployeeTrainings" Relationship="Self.FK__EmployeeT__Emplo__3E52440B" FromRole="Employees" ToRole="EmployeeTrainings" />
+        </EntityType>
+        <EntityType Name="EmployeeTrainings">
+          <Key>
+            <PropertyRef Name="RecordID" />
+          </Key>
+          <Property Name="RecordID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="Int32" />
+          <Property Name="TrainingID" Type="Int32" />
+          <Property Name="ParticipationStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__EmployeeT__Emplo__3E52440B" FromRole="EmployeeTrainings" ToRole="Employees" />
+          <NavigationProperty Name="Trainings" Relationship="Self.FK__EmployeeT__Train__3F466844" FromRole="EmployeeTrainings" ToRole="Trainings" />
+        </EntityType>
+        <EntityType Name="EmployeeTransfers">
+          <Key>
+            <PropertyRef Name="TransferID" />
+          </Key>
+          <Property Name="TransferID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="Int32" />
+          <Property Name="OriginalDepartment" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NewDepartment" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TransferDate" Type="DateTime" Precision="0" />
+          <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__EmployeeT__Emplo__398D8EEE" FromRole="EmployeeTransfers" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="NotificationID" />
+          </Key>
+          <Property Name="NotificationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DatePublished" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Trainings">
+          <Key>
+            <PropertyRef Name="TrainingID" />
+          </Key>
+          <Property Name="TrainingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Topic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TrainingDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="EmployeeTrainings" Relationship="Self.FK__EmployeeT__Train__3F466844" FromRole="Trainings" ToRole="EmployeeTrainings" />
+        </EntityType>
+        <Association Name="FK__EmployeeT__Emplo__398D8EEE">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="EmployeeTransfers" Type="Self.EmployeeTransfers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="EmployeeTransfers">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EmployeeT__Emplo__3E52440B">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="EmployeeTrainings" Type="Self.EmployeeTrainings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="EmployeeTrainings">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EmployeeT__Train__3F466844">
+          <End Role="Trainings" Type="Self.Trainings" Multiplicity="0..1" />
+          <End Role="EmployeeTrainings" Type="Self.EmployeeTrainings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainings">
+              <PropertyRef Name="TrainingID" />
+            </Principal>
+            <Dependent Role="EmployeeTrainings">
+              <PropertyRef Name="TrainingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EPMEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Employees" EntityType="Self.Employees" />
+          <EntitySet Name="EmployeeTrainings" EntityType="Self.EmployeeTrainings" />
+          <EntitySet Name="EmployeeTransfers" EntityType="Self.EmployeeTransfers" />
+          <EntitySet Name="Notifications" EntityType="Self.Notifications" />
+          <EntitySet Name="Trainings" EntityType="Self.Trainings" />
+          <AssociationSet Name="FK__EmployeeT__Emplo__398D8EEE" Association="Self.FK__EmployeeT__Emplo__398D8EEE">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="EmployeeTransfers" EntitySet="EmployeeTransfers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EmployeeT__Emplo__3E52440B" Association="Self.FK__EmployeeT__Emplo__3E52440B">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="EmployeeTrainings" EntitySet="EmployeeTrainings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EmployeeT__Train__3F466844" Association="Self.FK__EmployeeT__Train__3F466844">
+            <End Role="Trainings" EntitySet="Trainings" />
+            <End Role="EmployeeTrainings" EntitySet="EmployeeTrainings" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EPMModelStoreContainer" CdmEntityContainer="EPMEntities">
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="EPMModel.Employees">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="CurrentDepartment" ColumnName="CurrentDepartment" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeTrainings">
+            <EntityTypeMapping TypeName="EPMModel.EmployeeTrainings">
+              <MappingFragment StoreEntitySet="EmployeeTrainings">
+                <ScalarProperty Name="RecordID" ColumnName="RecordID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="TrainingID" ColumnName="TrainingID" />
+                <ScalarProperty Name="ParticipationStatus" ColumnName="ParticipationStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeTransfers">
+            <EntityTypeMapping TypeName="EPMModel.EmployeeTransfers">
+              <MappingFragment StoreEntitySet="EmployeeTransfers">
+                <ScalarProperty Name="TransferID" ColumnName="TransferID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="OriginalDepartment" ColumnName="OriginalDepartment" />
+                <ScalarProperty Name="NewDepartment" ColumnName="NewDepartment" />
+                <ScalarProperty Name="TransferDate" ColumnName="TransferDate" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="EPMModel.Notifications">
+              <MappingFragment StoreEntitySet="Notifications">
+                <ScalarProperty Name="NotificationID" ColumnName="NotificationID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="DatePublished" ColumnName="DatePublished" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trainings">
+            <EntityTypeMapping TypeName="EPMModel.Trainings">
+              <MappingFragment StoreEntitySet="Trainings">
+                <ScalarProperty Name="TrainingID" ColumnName="TrainingID" />
+                <ScalarProperty Name="Topic" ColumnName="Topic" />
+                <ScalarProperty Name="TrainingDate" ColumnName="TrainingDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
