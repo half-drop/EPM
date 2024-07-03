@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using EPM.Models;
@@ -182,6 +185,85 @@ namespace EPM.Controllers
         private string EncryptPassword(string password)
         {
             return password;
+        }
+
+        private string GenerateCsvFromEmployees(List<Employees> employees)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine("员工编号,姓名,联系方式,工资,权限,部门");
+            foreach (var emp in employees)
+            {
+                sb.AppendLine($"{emp.EmployeeID},{emp.Name},{emp.Contact},{emp.Salary},{emp.Role},{emp.CurrentDepartment}");
+            }
+            return sb.ToString();
+        }
+
+        public ActionResult Export()
+        {
+            var employees = db.Employees.ToList();
+            var csv = GenerateCsvFromEmployees(employees);
+            var bytes = Encoding.UTF8.GetPreamble().Concat(Encoding.UTF8.GetBytes(csv)).ToArray();
+            return File(bytes, "text/csv", "员工信息表.csv");
+        }
+
+        public ActionResult Backup()
+        {
+            string databaseName = "EPM";
+            string backupFileName = $"F:\\2023-2024(2)\\软工实习\\项目文件\\SQL\\EPM.bak";
+
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["SqlServerConnection"].ConnectionString))
+            {
+                var query = $@"
+BACKUP DATABASE [{databaseName}]
+TO DISK = '{backupFileName}'
+WITH FORMAT, MEDIANAME = 'SQLServerBackups',
+NAME = 'Full Backup of {databaseName}';";
+
+                using (var command = new SqlCommand(query, connection))
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            string script = "<script type='text/javascript'>" +
+                    "alert('数据库备份成功！');" +
+                    "setTimeout(function(){" +
+                    "window.location.href='" + Url.Action("Dashboard", "Employees") + "';" +
+                    "}, 0);" +
+                    "</script>";
+
+            return Content(script, "text/html");
+        }
+
+        public ActionResult Restore()
+        {
+            string databaseName = "EPM";
+            string backupFileName = "F:\\2023-2024(2)\\软工实习\\项目文件\\SQL\\EPM.bak";
+
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["SqlServerConnection"].ConnectionString))
+            {
+                var query = $@"
+USE master;
+ALTER DATABASE [{databaseName}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+RESTORE DATABASE [{databaseName}] FROM DISK = '{backupFileName}' WITH REPLACE;
+ALTER DATABASE [{databaseName}] SET MULTI_USER;";
+
+                using (var command = new SqlCommand(query, connection))
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            string script = "<script type='text/javascript'>" +
+                    "alert('数据库还原成功！');" +
+                    "setTimeout(function(){" +
+                    "window.location.href='" + Url.Action("Dashboard", "Employees") + "';" +
+                    "}, 0);" +
+                    "</script>";
+
+            return Content(script, "text/html");
         }
     }
 }

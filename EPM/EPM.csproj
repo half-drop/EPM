@@ -242,6 +242,7 @@
     <Content Include="Views\Notifications\Index.cshtml" />
     <Content Include="Views\Employees\ChangePassword.cshtml" />
     <Content Include="Views\Notifications\List.cshtml" />
+    <Content Include="Views\Employees\Export.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
