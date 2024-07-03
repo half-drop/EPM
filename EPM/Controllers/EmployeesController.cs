@@ -190,7 +190,7 @@ namespace EPM.Controllers
         private string GenerateCsvFromEmployees(List<Employees> employees)
         {
             var sb = new StringBuilder();
-            sb.AppendLine("员工编号,姓名,联系方式,工资,权限,部门");
+            sb.AppendLine("员工编号,姓名,职称,工资,权限,部门");
             foreach (var emp in employees)
             {
                 sb.AppendLine($"{emp.EmployeeID},{emp.Name},{emp.Contact},{emp.Salary},{emp.Role},{emp.CurrentDepartment}");

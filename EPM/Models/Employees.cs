@@ -29,7 +29,6 @@ namespace EPM.Models
         public string Password { get; set; }
         [Range(0, 2, ErrorMessage = "角色只能是0（用户）、1（人事专员）或2（管理员）")]
         public Nullable<int> Role { get; set; }
-        [RegularExpression(@"^\d{11}$", ErrorMessage = "联系方式必须是11位数字")]
         public string Contact { get; set; }
         public string CurrentDepartment { get; set; }
         public Nullable<decimal> Salary { get; set; }
